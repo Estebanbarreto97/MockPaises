@@ -12,9 +12,27 @@ val api = RestCountriesAPI()
 api.buscarPaisesPorNombre("guay")
 api.paisConCodigo("CHL")
 */
+/*
+val currencyApi = CurrencyConverterAPI("d04de9e40952afdda643")
+//PEN es el código del sol peruano
+CurrencyConverterAPI("d04de9e40952afdda643").convertirDolarA("PEN")
+*/
+//RestCountriesAPI().todosLosPaises()
+//TransforamadorCountryAPais.devolvertodo()
 
-//val currencyApi = CurrencyConverterAPI("492aab070de58ba9e5bb")
-// PEN es el código del sol peruano
-//CurrencyConverterAPI("492aab070de58ba9e5bb").convertirDolarA("ARS")
+//CurrencyConverterAPI("d04de9e40952afdda643").convertirDolarA("feg")
 
-TransforamadorCountryAPais.devolvertodo()
+object test{
+    fun devolvererror(num : Int) {
+        if (num == 2)
+            error("holis")
+    }
+
+    fun averquepasa(num : Int) : Int {
+        devolvererror(num)
+        return 5
+    }
+
+}
+
+test.averquepasa(2)

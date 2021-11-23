@@ -28,7 +28,7 @@ object TransforamadorCountryAPais{
                 this.areaOrNull(paisApi),
                 paisApi.region,
                 this.currencyCodeOrNull(paisApi.currencies),
-                /*this.convertirADolarOrNull(paisApi.currencies)*/ 1.0,
+                apiCurr.convertirDolarA(paisApi.currencies!!.first().code)!!.toDouble(),
                 if (!esUnLimitrofe)
                     paisApi.borders!!.map { this.transformarAPaís(apiRest.paisConCodigo(it),true) }
                 else
@@ -52,7 +52,7 @@ object TransforamadorCountryAPais{
                 return lista.first().code
     }
 
-   /* fun convertirADolarOrNull(lista : List<Currency>?) : Double{
+   /*fun convertirADolarOrNull(lista : List<Currency>?) : Double{
         if (lista.isNullOrEmpty())
             return 1.0
         else
@@ -60,8 +60,8 @@ object TransforamadorCountryAPais{
                 return 1.0
             else
                 return apiCurr.convertirDolarA(lista.first().code)!!.toDouble()
+*/
 
-    }*/
 
     //es para probar
     fun devolvertodo() = apiRest.todosLosPaises().map { transformarAPaís(it,false).nombre }

@@ -22,17 +22,3 @@ CurrencyConverterAPI("d04de9e40952afdda643").convertirDolarA("PEN")
 
 //CurrencyConverterAPI("d04de9e40952afdda643").convertirDolarA("feg")
 
-object test{
-    fun devolvererror(num : Int) {
-        if (num == 2)
-            error("holis")
-    }
-
-    fun averquepasa(num : Int) : Int {
-        devolvererror(num)
-        return 5
-    }
-
-}
-
-test.averquepasa(2)

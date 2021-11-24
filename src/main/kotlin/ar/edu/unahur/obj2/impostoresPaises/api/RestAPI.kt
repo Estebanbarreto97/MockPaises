@@ -37,6 +37,7 @@ abstract class RestAPI {
     }
 
     val json = response.body!!.string()
+    response.body!!.close()
 
     // Horrible, pero la RestCountriesAPI en vez de tirar un 404,
     // devuelve un objeto que dice que es un 404.

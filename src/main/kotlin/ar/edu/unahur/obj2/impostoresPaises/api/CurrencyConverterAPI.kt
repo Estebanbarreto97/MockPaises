@@ -20,6 +20,14 @@ class CurrencyConverterAPI(apiKey: String) : RestAPI() {
 
   override val urlBase = "https://free.currconv.com/api/v7/convert?compact=ultra&apiKey=$apiKey"
 
-  fun convertirDolarA(codigoMoneda: String) =
-    obtenerRecurso("&q=USD_${codigoMoneda}", currencyAdapter)!!["USD_${codigoMoneda}"]
+  fun convertirDolarA(codigoMoneda: String) : Double {
+    if (obtenerRecurso("&q=USD_${codigoMoneda}", currencyAdapter).isNullOrEmpty())
+      return 1.0
+    else
+      return obtenerRecurso("&q=USD_${codigoMoneda}", currencyAdapter)!!["USD_${codigoMoneda}"]!!.toDouble()
+
+  }
+
+
 }
+//

@@ -6,19 +6,6 @@ import javax.xml.crypto.dsig.Transform
 // Algunos ejemplos para que jueguen un poco
 // con lo que devuelve la API
 
-/*
-val api = RestCountriesAPI()
+val arg = TransforamadorCountryAPais.transformarAPaís(RestCountriesAPI().buscarPaisesPorNombre("argentina").first(),false)
 
-api.buscarPaisesPorNombre("guay")
-api.paisConCodigo("CHL")
-*/
-/*
-val currencyApi = CurrencyConverterAPI("d04de9e40952afdda643")
-//PEN es el código del sol peruano
-CurrencyConverterAPI("d04de9e40952afdda643").convertirDolarA("PEN")
-*/
-//RestCountriesAPI().todosLosPaises()
-//TransforamadorCountryAPais.devolvertodo()
-
-//CurrencyConverterAPI("d04de9e40952afdda643").convertirDolarA("feg")
-
+arg.paisesLimitrofes[2].nombre

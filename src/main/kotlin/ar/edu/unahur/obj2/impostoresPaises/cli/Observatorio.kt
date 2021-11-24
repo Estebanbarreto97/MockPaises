@@ -39,8 +39,5 @@ object Observatorio {
     fun seRepitenLosValores(valor1 : String, valor2 : String) {
         if (valor1 == valor2)
             error("los parametros pasados son idénticos")
-        else if (!(listaDePaises.containsKey(valor1)) or (listaDePaises.containsKey(valor2)) )
-            error("algun de los paises no existe")
     }
-
 }

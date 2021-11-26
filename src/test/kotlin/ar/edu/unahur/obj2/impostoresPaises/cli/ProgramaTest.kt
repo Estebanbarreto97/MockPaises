@@ -82,7 +82,9 @@ class ProgramaTest : DescribeSpec({
   every { transformadorMock.buscarPaisesPorNombre("argentina")} returns listOf(argentina)
   every { transformadorMock.buscarPaisesPorNombre("bolivia") } returns listOf(bolivia)
   every { transformadorMock.buscarPaisesPorNombre("caboverde") } returns listOf(caboVerde)
+  every { transformadorMock.todosLosPaises() } returns listOf(argentina,peru,brasil,bolivia,caboVerde)
 
+  /*
   val arg = TransformadorCountryAPais.transformarAPaís(argentina,false)
   val per = TransformadorCountryAPais.transformarAPaís(peru,false)
   val bra = TransformadorCountryAPais.transformarAPaís(brasil,false)
@@ -91,8 +93,7 @@ class ProgramaTest : DescribeSpec({
 
   Observatorio.listaDePaises = mutableMapOf(Pair(arg.nombre,arg),Pair(bol.nombre,bol),Pair(cvp.nombre,cvp),Pair(bra.nombre,bra), Pair(per.nombre,per))
   Observatorio.listaDeContinentes = mutableMapOf(Pair("America",listOf(arg,bol,bra,per)), Pair("Europa", listOf(cvp)))
-
-
+  */
   describe("Programa") {
     val consolaMock = mockk<Consola>()
     Programa.entradaSalida = consolaMock
@@ -158,7 +159,7 @@ class ProgramaTest : DescribeSpec({
     it("continente mas plurinacional"){
       every {consolaMock.leerLinea()} returnsMany listOf("argentina","11")
       Programa.iniciar()
-      verify { consolaMock.escribirLinea("el continente con mas paises plurinacionales es : America") }
+      verify { consolaMock.escribirLinea("el continente con mas paises plurinacionales es : Americas") }
     }
     it("promedio poblacion islas"){
       every {consolaMock.leerLinea()} returnsMany listOf("argentina","12")

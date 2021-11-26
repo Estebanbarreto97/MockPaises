@@ -1,4 +1,4 @@
-/*package ar.edu.unahur.obj2.impostoresPaises.api
+package ar.edu.unahur.obj2.impostoresPaises.api
 
 import ar.edu.unahur.obj2.impostoresPaises.cli.Pais
 import io.kotest.core.spec.style.DescribeSpec
@@ -12,12 +12,6 @@ import io.mockk.every
 import io.mockk.mockk
 import io.mockk.runs
 import io.mockk.verify
-
-//import net.bytebuddy.asm.Advice
-
-// Estos tests están simplemente como ejemplo de lo que **no** hay que hacer.
-// Prueben de ejecutarlos sin internet y van a ver cómo fallan miserablemente.
-
 
 
 class RestCountriesAPITest : DescribeSpec({
@@ -72,4 +66,3 @@ class RestCountriesAPITest : DescribeSpec({
 })
 
 
-*/

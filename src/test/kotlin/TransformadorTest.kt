@@ -1,10 +1,9 @@
-import ar.edu.unahur.obj2.impostoresPaises.api.Country
-import ar.edu.unahur.obj2.impostoresPaises.api.Currency
-import ar.edu.unahur.obj2.impostoresPaises.api.Language
-import ar.edu.unahur.obj2.impostoresPaises.api.RegionalBloc
+import ar.edu.unahur.obj2.impostoresPaises.api.*
 import ar.edu.unahur.obj2.impostoresPaises.cli.TransformadorCountryAPais
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
+import io.mockk.every
+import io.mockk.mockk
 
 class TransformadorTest : DescribeSpec ({
     val caboVerde =
@@ -29,12 +28,17 @@ class TransformadorTest : DescribeSpec ({
             "Americas",
             11673029,
             1098581.0,
-            listOf("ARG", "BRA", "CHL", "PRY", "PER"),
+            listOf(),
             listOf(Language("Spanish"), Language("Aymara"), Language("Quechua")),
             listOf(RegionalBloc("USAN", "Union of South American Nations")),
             listOf(Currency("BOB"))
         )
     describe("transformar"){
+        val apimock = mockk<RestCountriesAPI>()
+        TransformadorCountryAPais.apiRest = apimock
+        every { apimock.paisConCodigo("BOL") } returns bolivia
+        every { apimock.paisConCodigo("CPV") } returns caboVerde
+
         val pais = TransformadorCountryAPais.transformarAPaís(bolivia,false)
         pais.nombre.shouldBe("Bolivia (Plurinational State of)")
     }

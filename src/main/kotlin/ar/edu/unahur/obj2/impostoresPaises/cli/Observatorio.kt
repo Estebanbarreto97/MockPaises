@@ -6,8 +6,8 @@ import ar.edu.unahur.obj2.impostoresPaises.api.RegionalBloc
 import ar.edu.unahur.obj2.impostoresPaises.api.RestCountriesAPI
 
 object Observatorio {
-    var listaDePaises = mutableMapOf<String,Pais>() //TransformadorCountryAPais.transformarListaMundialAMapObservatorio()
-    var listaDeContinentes = mutableMapOf<String,List<Pais>>() //TransformadorCountryAPais.transformarListaMundialAMapDeContinente()
+    var listaDePaises = TransformadorCountryAPais.transformarListaMundialAMapObservatorio()
+    var listaDeContinentes = TransformadorCountryAPais.transformarListaMundialAMapDeContinente()
     fun sonLimitrofes(pais1 : String, pais2: String) :Boolean {
         this.seRepitenLosValores(pais1,pais2)
         return listaDePaises.getValue(pais1).esLimitrofeCon(listaDePaises.getValue(pais2))

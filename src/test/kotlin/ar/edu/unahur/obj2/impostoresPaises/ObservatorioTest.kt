@@ -1,3 +1,5 @@
+package ar.edu.unahur.obj2.impostoresPaises
+
 import ar.edu.unahur.obj2.impostoresPaises.api.*
 import ar.edu.unahur.obj2.impostoresPaises.cli.Observatorio
 import ar.edu.unahur.obj2.impostoresPaises.cli.Pais
@@ -80,6 +82,8 @@ class observatorioTest : DescribeSpec ({
     every { apimock.todosLosPaises() } returns listOf(arg,chl,usa,tai,per)
     every { apimock.paisConCodigo(any()) } returns arg
 
+    Observatorio.listaDePaises = TransformadorCountryAPais.transformarListaMundialAMapObservatorio()
+    Observatorio.listaDeContinentes = TransformadorCountryAPais.transformarListaMundialAMapDeContinente()
 
     describe("son limitrofes 2 paises"){
         it("son"){

@@ -94,6 +94,7 @@ class ProgramaTest : DescribeSpec({
   Observatorio.listaDePaises = mutableMapOf(Pair(arg.nombre,arg),Pair(bol.nombre,bol),Pair(cvp.nombre,cvp),Pair(bra.nombre,bra), Pair(per.nombre,per))
   Observatorio.listaDeContinentes = mutableMapOf(Pair("America",listOf(arg,bol,bra,per)), Pair("Europa", listOf(cvp)))
   */
+
   describe("Programa") {
     val consolaMock = mockk<Consola>()
     Programa.entradaSalida = consolaMock

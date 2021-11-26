@@ -8,7 +8,6 @@ object Programa {
   // Ambas son variables para poder cambiarlas en los tests
   var entradaSalida = Consola
   var api = RestCountriesAPI()
-
   fun iniciar() {
     entradaSalida.escribirLinea(AsciiArt.mundo)
     entradaSalida.escribirLinea("Holis,ingresa el nombre de un país :)")
@@ -27,10 +26,10 @@ object Programa {
       check(valorelegido is Number &&(valorelegido > lista.size || valorelegido < lista.size)){
         "ingresaste algo mal :("
       }
-      return TransforamadorCountryAPais.transformarAPaís(lista[valorelegido],false)
+      return TransformadorCountryAPais.transformarAPaís(lista[valorelegido],false)
     }
     else
-      return TransforamadorCountryAPais.transformarAPaís(lista.first(),false)
+      return TransformadorCountryAPais.transformarAPaís(lista.first(),false)
   }
 
   fun menu(pais : Pais){
@@ -43,7 +42,11 @@ object Programa {
             "6 - si necesita traducción para dialogar con otro país\n" +
             "7 - si es potencial aliado con otro país\n" +
             "8 - si conviene ir de compras a otro país\n" +
-            "9 - cuanto equivale un determinado monto en otro país\n")
+            "9 - cuanto equivale lam moneda en otro país\n" +
+            "10 -el codigo iso de los 5 paises mas poblados\n" +
+            "11 -el continente con mas paises plurinacionales\n" +
+            "12 - el promedio de poblacion en islas")
+
     val eleccion = entradaSalida.leerLinea()
     lateinit var eleccionfutura : String
     when(eleccion){
@@ -56,7 +59,7 @@ object Programa {
               else
                 entradaSalida.escribirLinea("el país no es una isla") }
       "3" -> entradaSalida.escribirLinea("su densidad poblacional es: ${pais.densidadPoblacional()}")
-      "4" -> entradaSalida.escribirLinea("su vecino mas poblado es: ${pais.vecinoMasPoblado()}")
+      "4" -> entradaSalida.escribirLinea("su vecino mas poblado es: ${pais.vecinoMasPoblado()!!.nombre}")
       "5" -> { entradaSalida.escribirLinea("ingrese el país a comparar")
                 eleccionfutura = entradaSalida.leerLinea().toString()
                 checkNotNull(eleccionfutura){"no se ingresó nada :("}
@@ -77,6 +80,10 @@ object Programa {
               eleccionfutura = entradaSalida.leerLinea().toString()
               checkNotNull(eleccionfutura){"no se ingresó nada :("}
               checkEquivalencia(pais,SeleccionarPaisDeLista(api.buscarPaisesPorNombre(eleccionfutura))) }
+        "10" -> check5CodigoIso()
+        "11" -> checkContinenteConMas()
+        "12" -> checkPromedioPoblacionIslas()
+        else -> entradaSalida.escribirLinea("algo malio sal")
 
     }
   }
@@ -93,7 +100,7 @@ object Programa {
     if(Observatorio.necesitanTraduccion(pais1.nombre,pais2.nombre))
       entradaSalida.escribirLinea("necesitan traduccion :c")
     else
-      entradaSalida.escribirLinea("no son limitrofes")
+      entradaSalida.escribirLinea("no necesitan traduccion")
   }
 
   fun checkPotencialAliado(pais1: Pais, pais2: Pais){
@@ -112,6 +119,18 @@ object Programa {
 
   fun checkEquivalencia(pais: Pais, pais2: Pais){
     entradaSalida.escribirLinea("el valor del pais destino es de 1 : ${Observatorio.equivalenciasDe_Hacia_(pais.nombre,pais2.nombre,1)}")
+  }
+
+  fun check5CodigoIso(){
+      entradaSalida.escribirLinea("los codigo iso de los 5 paises mas poblados son: ${Observatorio.codigoIsoDe5PaisesMayorPoblados().forEach{entradaSalida.escribirLinea(it)}}")
+  }
+
+  fun checkContinenteConMas(){
+      entradaSalida.escribirLinea("el continente con mas paises plurinacionales es : ${Observatorio.continenteConMasPaisesPlurinacionales()}")
+  }
+
+  fun checkPromedioPoblacionIslas(){
+      entradaSalida.escribirLinea("el promedio de densidad poblacional de las islas es de : ${Observatorio.promedioDensidadPoblacionalEnPaisesIslas()}")
   }
 
 

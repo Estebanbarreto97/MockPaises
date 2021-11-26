@@ -17,8 +17,8 @@ class Pais (val nombre : String,
     fun esUnaIsla() = paisesLimitrofes.size == 0
     fun densidadPoblacional() = (poblacion / superficie).toInt()
     fun vecinoMasPoblado() = (paisesLimitrofes + this).maxByOrNull{it.poblacion}
-    fun esLimitrofeCon(paisAComparar : Pais) = this.paisesLimitrofes.contains(paisAComparar)
-    fun necesitaTraduccionPara(paisAComparar: Pais) = this.idiomasOficiales.any{paisAComparar.idiomasOficiales.contains(it)}
+    fun esLimitrofeCon(paisAComparar : Pais) = this.paisesLimitrofes.any{it.nombre == paisAComparar.nombre}
+    fun necesitaTraduccionPara(paisAComparar: Pais) = !this.idiomasOficiales.any{paisAComparar.idiomasOficiales.contains(it)}
     fun comparteBloqueRegionalCon(paisAComparar: Pais) = this.bloquesRegionales.any{paisAComparar.bloquesRegionales.contains(it)}
     fun esPotencialAliadoCon(paisAComparar: Pais) = !(this.necesitaTraduccionPara(paisAComparar)) and this.comparteBloqueRegionalCon(paisAComparar)
     fun convieneIrDeComprasA(paisAComparar: Pais) = this.cotizacionDolar < paisAComparar.cotizacionDolar

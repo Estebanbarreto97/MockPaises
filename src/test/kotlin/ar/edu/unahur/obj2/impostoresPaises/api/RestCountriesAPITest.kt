@@ -1,17 +1,28 @@
 package ar.edu.unahur.obj2.impostoresPaises.api
 
+import ar.edu.unahur.obj2.impostoresPaises.cli.Pais
 import io.kotest.core.spec.style.DescribeSpec
+import io.kotest.core.spec.style.Test
+import io.kotest.matchers.booleans.shouldBeFalse
+import io.kotest.matchers.booleans.shouldBeTrue
 import io.kotest.matchers.collections.shouldContainExactly
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
+import io.mockk.every
+import io.mockk.mockk
+import io.mockk.runs
+import io.mockk.verify
+
+//import net.bytebuddy.asm.Advice
 
 // Estos tests están simplemente como ejemplo de lo que **no** hay que hacer.
 // Prueben de ejecutarlos sin internet y van a ver cómo fallan miserablemente.
 
+
+
 class RestCountriesAPITest : DescribeSpec({
   describe("API de países") {
-    val api = RestCountriesAPI()
-
+    val MockApi = mockk<RestCountriesAPI>()
     val caboVerde =
       Country(
         "Cabo Verde",
@@ -41,16 +52,23 @@ class RestCountriesAPITest : DescribeSpec({
       )
 
     it("buscar por nombre") {
-      val paisesCaboVerde = api.buscarPaisesPorNombre("cabo verde")
-      paisesCaboVerde.shouldContainExactly(caboVerde)
+      every { MockApi.buscarPaisesPorNombre(any()) } returns listOf(bolivia)
+      MockApi.buscarPaisesPorNombre("bolivia")
+      verify { MockApi.buscarPaisesPorNombre("bolivia") }
+
     }
 
     it("buscar por código") {
-      api.paisConCodigo("BOL").shouldBe(bolivia)
+      every { MockApi.paisConCodigo(any()) } returns bolivia
+      MockApi.paisConCodigo("BOL")
+      verify { MockApi.paisConCodigo("BOL") }
     }
 
     it("info de todos los países") {
-      api.todosLosPaises().shouldHaveSize(250)
+      every { MockApi.todosLosPaises() } returns listOf(bolivia,caboVerde)
+      MockApi.todosLosPaises().shouldHaveSize(2)
     }
   }
 })
+
+

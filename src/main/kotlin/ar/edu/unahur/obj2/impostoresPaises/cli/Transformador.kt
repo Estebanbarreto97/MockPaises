@@ -7,9 +7,9 @@ import ar.edu.unahur.obj2.impostoresPaises.api.RestCountriesAPI
 import java.util.*
 
 
-object TransforamadorCountryAPais{
-    val apiRest = RestCountriesAPI()
-    val apiCurr = CurrencyConverterAPI("d04de9e40952afdda643")
+object TransformadorCountryAPais{
+    var apiRest = RestCountriesAPI()
+    var apiCurr = CurrencyConverterAPI("d04de9e40952afdda643")
 
     fun transformarListaMundialAMapObservatorio() : Map<String, Pais>{
         return apiRest.todosLosPaises().map {it.name to transformarAPaís(it,false) }.toMap()
@@ -29,10 +29,7 @@ object TransforamadorCountryAPais{
                 paisApi.area ?:paisApi.population.toDouble(),
                 paisApi.region,
                 this.currencyCodeOrNull(paisApi.currencies),
-                if (!esUnLimitrofe)
-                    apiCurr.convertirDolarA(currencyCodeOrNull(paisApi.currencies))
-                else
-                    1.0,
+                /*apiCurr.convertirDolarA(currencyCodeOrNull(paisApi.currencies))*/ 1.0,
                 if (!esUnLimitrofe)
                     paisApi.borders!!.map { this.transformarAPaís(apiRest.paisConCodigo(it),true) }
                 else

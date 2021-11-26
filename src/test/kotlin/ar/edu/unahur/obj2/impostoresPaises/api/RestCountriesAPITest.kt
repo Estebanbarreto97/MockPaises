@@ -1,4 +1,4 @@
-package ar.edu.unahur.obj2.impostoresPaises.api
+/*package ar.edu.unahur.obj2.impostoresPaises.api
 
 import ar.edu.unahur.obj2.impostoresPaises.cli.Pais
 import io.kotest.core.spec.style.DescribeSpec
@@ -72,3 +72,4 @@ class RestCountriesAPITest : DescribeSpec({
 })
 
 
+*/
